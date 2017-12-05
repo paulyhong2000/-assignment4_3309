@@ -59,14 +59,31 @@ router.post('/change', function(req,res,next)
     let className = req.body.className;
     let  price = req.body.price;
     
-    con.query('update pet set price='+price+'where className="'+className+'"', function(error, results, fields) {
+    con.query(
+        {sql: 'UPDATE pet SET price= ? where className=?'},
+        [price, className],
+        function(error, results, fields) {
 		if (error) throw error;
+// 		con.query(
+// 		    {sql: 'Select * From pet where className =?'},
+// 		    [className],
+// 		    function(error, results, fields) {
+// 		        if (error) throw error;
+// 		        res.send(JSON.stringify(results));
+// 		    });
 // 		con.query('select*from pet where className="'+className+'"', function(error, results, fields){
 // 		    if (error) throw error;
 // 		    res.send(JSON.stringify({"response": results}));
 // 		})
-    res.send("fine");
 	});
+	con.query(
+		    {sql: 'Select pName,PetID, price From pet where className =?'},
+		    [className],
+		    function(error, results, fields) {
+		        if (error) throw error;
+		        res.send(JSON.stringify(results));
+		    });
+//	res.send(JSON.stringify("fine"));
 });
 
 router.delete('/remove', function(req,res,next)
