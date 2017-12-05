@@ -89,7 +89,7 @@ router.post('/change', function(req,res,next)
 router.delete('/remove', function(req,res,next)
 {
   let petID = req.body.petID;
-  con.query('DELETE FROM pet WHERE petID ='+petID)
+  con.query('DELETE FROM pet WHERE petID =')
 });
 
     
