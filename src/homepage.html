@@ -1,28 +1,46 @@
 <head>
     <script src="homepage.js"></script>
+    <link rel="stylesheet" type="text/css" href="homepage.css">
 </head>
 
 <body>
+    <h1>Pet Shop</h1>
+    <img src="http://images.clipartpanda.com/dog-and-cat-silhouette-stock-illustration-26622153-dog-cat-play.jpg"></img>
+    <h3>Michael Sweeney & Master Hong</h3>
 <h1>Welcome to our database management page</h1>
 
-<div>
-    <input type="text" id="textbox1">
-    <input type="button"onclick="firstbutton()" value="firstfunction">
-</div>
-<div>
-    <input type="text" id="textbox2">
-    <input type="button"onclick="secondbutton()" value="secondfunction">
-</div>
-<div>
-    <input type="text" id="textbox3">
-    <input type="button"onclick="thirdbutton()" value="thirdfunction">
-</div>
-<div>
-    <input type="text" id="textbox4">
-    <input type="button"onclick="thirdbutton()" value="thirdfunction">
-</div>
-<div>
-    <input type="text" id="textbox5">
-    <input type="button"onclick="fifthbutton()" value="fifthfunction">
-</div>
+<p>this web application provides 5 different functionalities to interact with the petshop database.</p>
+<p>to exit the application, please press the exit application button</p>
+
+
+<h3>Change the price of an Animal Class</h3>
+<h4>Class</h4>
+<input type="text" id="textbox1a">
+<h4>Price</h4>
+<input type="text" id="textbox1b"><br>
+<input type="button"onclick="firstbutton()" value="Change Price"> <img src="https://images-na.ssl-images-amazon.com/images/I/31AE55xP27L._SL500_.jpg" width="100" height="100"></img><br>
+<br>
+
+<h3>Delete pet based on petID</h3>
+<input type="text" id="textbox2"><br>
+<input type="button"onclick="secondbutton()" value="Delete Pet"><br>
+<br>
+
+
+<input type="text" id="textbox3">
+<input type="button"onclick="thirdbutton()" value="thirdfunction">
+
+<input type="text" id="textbox4">
+<input type="button"onclick="thirdbutton()" value="fourthfunction">
+
+<input type="text" id="textbox5">
+<input type="button"onclick="fifthbutton()" value="fifthfunction">
+
+<input class = exit type="button"onclick="exitbutton()" value="Exit Application">
+
+<input type="text" id = "output">
+
+
+<li id="display"></li>
+
 </body>
