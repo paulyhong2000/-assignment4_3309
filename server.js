@@ -90,7 +90,7 @@ router.post('/change', function(req,res,next)
       }
 	 );
 	con.query(
-		    {sql: 'Select pName,PetID, price From pet where className =?'},
+		    {sql: 'Select pName,PetID, price, className From pet where className =?'},
 		    [className],
 		    function(error, results, fields) {
 		        if (error) throw error;
@@ -108,7 +108,20 @@ router.post('/addpets', function(req, res, next) {
    let storeID = req.body.storeID;
    let spayedNeutered = req.body.spayedNeutered;
    //add customer with subquery to find
-   con.query()
+   con.query(
+     {sql: 'INSERT INTO pet(classname ,  pName, age, price, storeID, spayedNeutered) Values((Select className From animal where className = Dolor est.), ?, ?, ?, ?, ?)'},
+     [pName, age, price, storeID, spayedNeutered],
+     function(error, results, fields) {
+         if (error) throw error;
+         console.log("inserting new pet into pets database");
+     });
+     con.query(
+      {sql: 'Select * From pet'},
+      function(error, results, fields){
+        if (error) throw error;
+        console.log("we made it into the return statement");
+        res.send(JSON.stringify({"response": results}));
+    });
 });
 router.post('/remove', function(req,res,next)
 {

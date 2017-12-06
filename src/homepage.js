@@ -5,7 +5,7 @@ function round(value, decimals) {
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
 
-const url = "https://se3309final-dhong45.c9users.io:8081/api";
+const url = "https://finaldatabase-dhong45.c9users.io:8081/api";
 function firstbutton()
 {
     var payload = {className: document.getElementById("textbox1a").value, price: parseInt(document.getElementById("textbox1b").value)};
@@ -15,6 +15,30 @@ function firstbutton()
     	method: 'POST', 
     	header: {'Accept': 'application/json', 'Content-Type': 'application/json'},
     	body: enco,
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+        console.log(data);
+        var i=0;
+        var line="";
+        
+        line=("pName    PetID    price    className");
+        var ul = document.getElementById("list");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode(line));
+        ul.appendChild(li);
+        
+        while(i<data.response.length){
+            line=(data.response[i].pName+"  "+data.response[i].PetID+"  "+data.response[i].price+"  "+data.response[i].className);
+            var ul = document.getElementById("list");
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(line));
+            ul.appendChild(li);
+            i=i+1;
+        }
+    })
+    .catch(function(error) {
+        console.log(JSON.stringify(error));
     });
 }
   
@@ -27,6 +51,30 @@ function secondbutton()
     	method: 'POST',
     	header: {'Accept': 'application/json', 'Content-Type': 'application/json'},
     	body: enco,
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+        console.log(data);
+        var i=0;
+        var line="";
+        
+        line=("EID    Enam");
+        var ul = document.getElementById("list");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode(line));
+        ul.appendChild(li);
+        
+        while(i<data.response.length){
+            line=(data.response[i].EID+"  "+data.response[i].Ename);
+            var ul = document.getElementById("list");
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(line));
+            ul.appendChild(li);
+            i=i+1;
+        }
+    })
+    .catch(function(error) {
+        console.log(JSON.stringify(error));
     });
 }
 function thirdbutton()
@@ -47,7 +95,7 @@ function thirdbutton()
         var itemS=0;
         while(i<data.response.length){
             petS=petS+data.response[i].pPrice;
-            itemS=itemS+data.response[i].iPrice
+            itemS=itemS+data.response[i].iPrice;
             i=i+1;
         }
         petS=round(petS,2);
@@ -77,7 +125,7 @@ function fourthbutton(){
                  break;
              }
              else{
-                 document.getElementById('answerbox4').value="The pet has not been sold";
+                 document.getElementById('answerbox4').value="The pet has not been sold, or does not exist";
              }
              i=i+1;
         }

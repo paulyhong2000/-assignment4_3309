@@ -1,5 +1,5 @@
 {
-  "name": "finaldatabases",
+  "name": "databases",
   "version": "1.0.0",
   "description": "3rd year final databases assignment",
   "main": "server.js",
