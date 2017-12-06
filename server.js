@@ -44,9 +44,6 @@ router.get('/', function(req, res)
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-
-
-
 router.get('/stores', function(req, res, next) {
 	 con.query('SELECT * from stores', function (error, results, fields) {
 		if (error) throw error;
