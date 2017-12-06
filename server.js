@@ -56,7 +56,7 @@ router.get('/stores', function(req, res, next) {
 
 router.get('/soldPets', function(req,res,next) {
     console.log("right before the sold pets sqlquery");
-	 con.query('SELECT pet.name, transactionInst.TID, pet.PID FROM transactionInst JOIN pet ON pet.PID=transactionInst.PID;', function (error, results, fields) {
+	 con.query('SELECT pet.pName, transactionInst.TID, pet.PetID FROM transactionInst JOIN pet ON pet.PetID=transactionInst.PetID;', function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"response": results}));
 	});
@@ -67,15 +67,14 @@ router.post('/revenue', function(req,res,next)
   let storeID = req.body.storeID;
   console.log("Howdy");
   con.query(
-    {sql: 'select SUM(pet.price), SUM(items.price) from Stransaction,transactionInst,pet,items where (Stransaction.TID=transactionInst.TID) AND (transactionInst.PetID=pet.PetID) AND (transactionInst.ItemID=items.ItemID) AND (Stransaction.storeID=?) order by transactionInst.InstID;'},
+    {sql: 'select pet.price AS pPrice, items.price AS iPrice from Stransaction,transactionInst,pet,items where (Stransaction.TID=transactionInst.TID) AND (transactionInst.PetID=pet.PetID) AND (transactionInst.ItemID=items.ItemID) AND (Stransaction.storeID=?) order by transactionInst.InstID;'},
     [storeID],
     function(error, results, fields) {
       if (error) throw error;
       console.log("we made it in the revenue");
-		  res.send(JSON.stringify(results));
+		  res.send(JSON.stringify({"response": results}));
     }
   );
-  
 });
 
 router.post('/change', function(req,res,next)
@@ -96,16 +95,18 @@ router.post('/change', function(req,res,next)
 		    function(error, results, fields) {
 		        if (error) throw error;
 		        console.log("we made it in the query");
-		        res.send(JSON.stringify(results));
+		        res.send(JSON.stringify({"response": results}));
 		    }
   );
 });
 
 router.post('/addpets', function(req, res, next) {
-   let PetID= req.body.PetID;
-   let points= 0;
-   let phonenumber = req.body.phonenumber;
-   let email = req.body.email;
+   let className;//stuffffffffffff
+   let pName= req.body.pName;
+   let age = req.body.age;
+   let price = req.body.price;
+   let storeID = req.body.storeID;
+   let spayedNeutered = req.body.spayedNeutered;
    //add customer with subquery to find
    con.query()
 });
@@ -124,7 +125,7 @@ router.post('/remove', function(req,res,next)
     function(error, results, fields){
       if (error) throw error;
       console.log("we made it into the return statement");
-      res.send(JSON.stringify(results));
+      res.send(JSON.stringify({"response": results}));
     });
 });
 
