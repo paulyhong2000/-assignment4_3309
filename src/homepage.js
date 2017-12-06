@@ -99,18 +99,9 @@ function thirdbutton()
     .then((resp) => resp.json())
     .then(function(data) {
         console.log(data);
-        var i=0;
-        var petS=0;
-        var itemS=0;
-        while(i<data.response.length){
-            //petS=petS+data.response[i].pPrice;
-            //itemS=itemS+data.response[i].iPrice;
-            i=i+1;
-        }
-        petS=round(petS,2);
-        itemS=round(itemS,2);
-        document.getElementById('answerbox3a').value=("$"+data.response[0].storeID);
-        document.getElementById('answerbox3b').value=("$"+data.response[i].iPrice);
+        
+        document.getElementById('answerbox3a').value=("$"+data.response[0].pPrice);
+        document.getElementById('answerbox3b').value=("$"+data.response[0].iPrice);
     })
     .catch(function(error) {
         console.log(JSON.stringify(error));
