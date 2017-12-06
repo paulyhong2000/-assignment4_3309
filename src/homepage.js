@@ -5,9 +5,16 @@ function round(value, decimals) {
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
 
+function removeChild() {
+    while ( document.getElementById('list').firstChild ) {
+      document.getElementById('list').removeChild( document.getElementById('list').firstChild );
+    }
+}
+
 const url = "https://finaldatabase-dhong45.c9users.io:8081/api";
 function firstbutton()
 {
+    removeChild();
     var payload = {className: document.getElementById("textbox1a").value, price: parseInt(document.getElementById("textbox1b").value)};
     var enco = new URLSearchParams(payload);
     
@@ -44,6 +51,7 @@ function firstbutton()
   
 function secondbutton()
 {
+    removeChild();
     var payload = {EID: document.getElementById("textbox2").value};
     var enco = new URLSearchParams(payload);
     
@@ -58,7 +66,7 @@ function secondbutton()
         var i=0;
         var line="";
         
-        line=("EID    Enam");
+        line=("EID    Ename");
         var ul = document.getElementById("list");
         var li = document.createElement("li");
         li.appendChild(document.createTextNode(line));
@@ -79,6 +87,7 @@ function secondbutton()
 }
 function thirdbutton()
 {
+    removeChild();
     var payload = {storeID: document.getElementById("textbox3").value};
     var enco = new URLSearchParams(payload);
     
@@ -111,6 +120,7 @@ function thirdbutton()
 
 
 function fourthbutton(){
+    removeChild();
     console.log("fourthbutton");
     fetch(url+'/soldPets')
     .then((resp) => resp.json())
@@ -136,9 +146,44 @@ function fourthbutton(){
 }
 function fifthbutton()
 {
+    removeChild();
+    var payload = {className: document.getElementById("textbox5x").value, pName: document.getElementById("textbox5a").value, age: parseInt(document.getElementById("textbox5b").value), price: parseInt(document.getElementById("textbox5c").value), storeID: parseInt(document.getElementById("textbox5d").value), spayedNeutered: parseInt(document.getElementById("textbox5e").value)};
+    var enco = new URLSearchParams(payload);
+    
+    window.fetch(url+'/addpets', {
+    	method: 'POST', 
+    	header: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    	body: enco,
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+        console.log(data);
+        var i=0;
+        var line="";
+        
+        line=("className    pName    age    price    storeID    spayedNeutered");
+        var ul = document.getElementById("list");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode(line));
+        ul.appendChild(li);
+        
+        while(i<data.response.length){
+            line=(data.response[i].className+"  "+data.response[i].pName+"  "+data.response[i].age+"  "+data.response[i].price+"  "+data.response[i].storeID+"  "+data.response[i].spayedNeutered);
+            var ul = document.getElementById("list");
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(line));
+            ul.appendChild(li);
+            i=i+1;
+        }
+    })
+    .catch(function(error) {
+        console.log(JSON.stringify(error));
+    });
   
 }
 function exitbutton()
 {
+    removeChild();
   window.close();
 }
+

@@ -101,7 +101,7 @@ router.post('/change', function(req,res,next)
 });
 
 router.post('/addpets', function(req, res, next) {
-   let className;//stuffffffffffff
+   let className = req.body.className
    let pName= req.body.pName;
    let age = req.body.age;
    let price = req.body.price;
@@ -109,8 +109,8 @@ router.post('/addpets', function(req, res, next) {
    let spayedNeutered = req.body.spayedNeutered;
    //add customer with subquery to find
    con.query(
-     {sql: 'INSERT INTO pet(classname ,  pName, age, price, storeID, spayedNeutered) Values((Select className From animal where className = Dolor est.), ?, ?, ?, ?, ?)'},
-     [pName, age, price, storeID, spayedNeutered],
+     {sql: 'INSERT INTO pet(className ,  pName, age, price, storeID, spayedNeutered) Values( ?, ?, ?, ?, ?, ?)'},
+     [className ,pName, age, price, storeID, spayedNeutered],
      function(error, results, fields) {
          if (error) throw error;
          console.log("inserting new pet into pets database");
