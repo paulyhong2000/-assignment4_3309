@@ -67,7 +67,7 @@ router.post('/revenue', function(req,res,next)
   let storeID = req.body.storeID;
   console.log("Howdy");
   con.query(
-    {sql: 'select pet.price AS pPrice, items.price AS iPrice from Stransaction,transactionInst,pet,items where (Stransaction.TID=transactionInst.TID) AND (transactionInst.PetID=pet.PetID) AND (transactionInst.ItemID=items.ItemID) AND (Stransaction.storeID=?) order by transactionInst.InstID;'},
+    {sql: 'select Sum(pet.price) AS pPrice, Sum(items.price) AS iPrice from Stransaction,transactionInst,pet,items where (Stransaction.TID=transactionInst.TID) AND (transactionInst.PetID=pet.PetID) AND (transactionInst.ItemID=items.ItemID) AND (Stransaction.storeID=?) order by transactionInst.InstID;'},
     [storeID],
     function(error, results, fields) {
       if (error) throw error;
