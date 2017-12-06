@@ -20,7 +20,7 @@ function secondbutton()
     var enco = new URLSearchParams(payload);
     
     window.fetch(url+'/remove', {
-    	method: 'POST', 
+    	method: 'POST',
     	header: {'Accept': 'application/json', 'Content-Type': 'application/json'},
     	body: enco,
     });
@@ -36,9 +36,27 @@ function thirdbutton()
     	body: enco,
     });
 }
-function fourthbutton()
-{
-  
+
+
+
+function fourthbutton(){
+    console.log("fourthbutton");
+    fetch(url+'/soldPets')
+    .then((resp) => resp.json())
+    .then(function(data) {
+        console.log(data);
+        return data.map(function(temp) {
+            if(document.getElementById('textbox4').value==temp.PetID){
+                document.getElementById('answerbox4').value="True";
+            }
+            else{
+                document.getElementById('answerbox4').value="False";
+            }
+        });
+    })
+    .catch(function(error) {
+        console.log(JSON.stringify(error));
+    });
 }
 function fifthbutton()
 {

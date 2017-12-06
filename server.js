@@ -54,10 +54,27 @@ router.get('/stores', function(req, res, next) {
 	});
 });
 
+router.get('/soldPets', function(req,res,next) {
+    console.log("right before the sold pets sqlquery");
+	 con.query('SELECT pet.name, transactionInst.TID, pet.PID FROM transactionInst JOIN pet ON pet.PID=transactionInst.PID;', function (error, results, fields) {
+		if (error) throw error;
+		res.send(JSON.stringify({"response": results}));
+	});
+});
+
 router.post('/revenue', function(req,res,next)
 {
   let storeID = req.body.storeID;
-  
+  console.log("Howdy");
+  con.query(
+    {sql: 'select SUM(pet.price), SUM(items.price) from Stransaction,transactionInst,pet,items where (Stransaction.TID=transactionInst.TID) AND (transactionInst.PetID=pet.PetID) AND (transactionInst.ItemID=items.ItemID) AND (Stransaction.storeID=?) order by transactionInst.InstID;'},
+    [storeID],
+    function(error, results, fields) {
+      if (error) throw error;
+      console.log("we made it in the revenue");
+		  res.send(JSON.stringify(results));
+    }
+  );
   
 });
 
@@ -67,11 +84,12 @@ router.post('/change', function(req,res,next)
     let  price = req.body.price;
     
     con.query(
-        {sql: 'UPDATE pet SET price= ? where className=?'},
-        [price, className],
-        function(error, results, fields) {
-		if (error) throw error;
-	});
+      {sql: 'UPDATE pet SET price= ? where className=?'},
+      [price, className],
+      function(error, results, fields) {
+	      if (error) throw error;
+      }
+	 );
 	con.query(
 		    {sql: 'Select pName,PetID, price From pet where className =?'},
 		    [className],
@@ -79,9 +97,18 @@ router.post('/change', function(req,res,next)
 		        if (error) throw error;
 		        console.log("we made it in the query");
 		        res.send(JSON.stringify(results));
-		    });
+		    }
+  );
 });
 
+router.post('/addpets', function(req, res, next) {
+   let PetID= req.body.PetID;
+   let points= 0;
+   let phonenumber = req.body.phonenumber;
+   let email = req.body.email;
+   //add customer with subquery to find
+   con.query()
+});
 router.post('/remove', function(req,res,next)
 {
   let EID = req.body.EID;
