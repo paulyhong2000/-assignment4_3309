@@ -3,56 +3,32 @@
     <link rel="stylesheet" type="text/css" href="homepage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
-<script>
-// var app = angular.module('myApp', []);
-// app.controller('modelCtrl', function($scope, $http) {
-//     $http.get("query1.php")
-//       .then(function (response) {$scope.models = response.data.records;});
 
-// });
-</script>
 <body>
     <h1>Pet Shop</h1>
     <img src="http://images.clipartpanda.com/dog-and-cat-silhouette-stock-illustration-26622153-dog-cat-play.jpg"></img>
-    <h3>Michael Sweeney & Master Hong</h3>
+    <h3>Sweeney&Hong</h3>
 <h1>Welcome to our database management page</h1>
 
 <p>this web application provides 5 different functionalities to interact with the petshop database.</p>
 <p>to exit the application, please press the exit application button</p>
 
-
-<!--<div ng-app="myApp" ng-controller="modelCtrl">-->
-<!--<table>-->
-<!--  <tr>-->
-<!--  <th>pName</th>-->
-<!--  <th>PetID</th>-->
-<!--  <th>price</th>-->
-<!--  </tr>-->
-
-<!--     <p>Display records </p>-->
-<!--  <tr ng-repeat="model in models">-->
-<!--    <td>{{ model.pName }}</td>-->
-<!--    <td>{{ model.PetID }}</td>-->
-<!--    <td>{{ model.price }}</td>-->
-<!--  </tr>-->
-<!--</table>-->
-<!--</div>-->
-
 <h3>Change the price of all pets of a specific Animal Class</h3>
 <h4>Class</h4>
 <input type="text" id="textbox1a">
 <h4>Price</h4>
-<input type="text" id="textbox1b"><br>
+<input type="text" onkeypress="return isNumberKey(this, event)" id="textbox1b"><br>
 <input type="button" onclick="firstbutton()" value="Change Price"> <img src="https://images-na.ssl-images-amazon.com/images/I/31AE55xP27L._SL500_.jpg" width="100" height="100"></img><br>
 <br>
 
 <h3>Delete employee based on employee ID</h3>
-<input type="text" id="textbox2"><br>
+<h4>EmployeeID</h4>
+<input type="text" onkeypress="return isNumberKey(this, event)" id="textbox2"><br>
 <input type="button" onclick="secondbutton()" value="Delete Employee"><br>
 <br>
 
 <h3>Find sum of pet sales and item sales for a store based on store ID</h3>
-<input type="text" id="textbox3"><br>
+<input type="text" onkeypress="return isNumberKey(this, event)" id="textbox3"><br>
 <h4>Pet Revenue</h4>
 <input type="text" id="answerbox3a"><br>
 <h4>Item Revenue</h4>
@@ -61,7 +37,8 @@
 <br>
 
 <h3>Display if an entered Pet ID corresponds to a pet that has been sold</h3>
-<input type="text" id="textbox4"><br>
+<h4>PetID</h4>
+<input type="text" onkeypress="return isNumberKey(this, event)" id="textbox4"><br>
 <h4>Answer</h4>
 <input type="text" id="answerbox4" size="50"><br>
 <input type="button" onclick="fourthbutton()" value="Check Pet"><br>
@@ -72,21 +49,19 @@
 <h4>pName</h4>
 <input type="text" id="textbox5a"><br>
 <h4>age</h4>
-<input type="text" id="textbox5b"><br>
+<input type="text" onkeypress="return isNumberKey(this, event)" id="textbox5b"><br>
 <h4>price</h4>
-<input type="text" id="textbox5c"><br>
+<input type="text" onkeypress="return isNumberKey(this, event)" id="textbox5c"><br>
 <h4>storeID</h4>
-<input type="text" id="textbox5d"><br>
+<input type="text" onkeypress="return isNumberKey(this, event)" id="textbox5d"><br>
 <h4>spayedNeutered</h4>
-<input type="text" id="textbox5e"><br>
+<input type="text"  onkeypress="return isNumberKey(this, event)" ="textbox5e"><br>
 <h4>className</h4>
 <input type="text" id="textbox5x"><br>
 <input type="button" onclick="fifthbutton()" value="Add Pet"><br>
 <br>
 
 <input class = exit type="button" onclick="exitbutton()" value="Exit Application"><br>
-
-<input type="text" name="" id = "output">
 
 <ul id="list">
 
