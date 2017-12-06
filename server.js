@@ -81,6 +81,7 @@ router.post('/change', function(req,res,next)
 		    [className],
 		    function(error, results, fields) {
 		        if (error) throw error;
+		        console.log("we made it in the query");
 		        res.send(JSON.stringify(results));
 		    });
 //	res.send(JSON.stringify("fine"));
@@ -89,7 +90,7 @@ router.post('/change', function(req,res,next)
 router.delete('/remove', function(req,res,next)
 {
   let petID = req.body.petID;
-  con.query('DELETE FROM pet WHERE petID =')
+  con.query('DELETE FROM employee WHERE EID =?')
 });
 
     

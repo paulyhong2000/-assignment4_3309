@@ -1,7 +1,17 @@
+/*global fetch*/
+/*global URLSearchParams*/
+
 const url = "https://se3309final-dhong45.c9users.io:8081/api";
 function firstbutton()
 {
-  
+    var payload = {className: document.getElementById("textbox1a").value, price: parseInt(document.getElementById("textbox1b").value)};
+    var enco = new URLSearchParams(payload);
+    
+    window.fetch(url+'/change', {
+    	method: 'POST', 
+    	header: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    	body: enco,
+    });
 }
   
 function secondbutton()
