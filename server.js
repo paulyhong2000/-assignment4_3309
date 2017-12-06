@@ -54,6 +54,13 @@ router.get('/stores', function(req, res, next) {
 	});
 });
 
+router.post('/revenue', function(req,res,next)
+{
+  let storeID = req.body.storeID;
+  
+  
+});
+
 router.post('/change', function(req,res,next)
 {
     let className = req.body.className;
@@ -64,17 +71,6 @@ router.post('/change', function(req,res,next)
         [price, className],
         function(error, results, fields) {
 		if (error) throw error;
-// 		con.query(
-// 		    {sql: 'Select * From pet where className =?'},
-// 		    [className],
-// 		    function(error, results, fields) {
-// 		        if (error) throw error;
-// 		        res.send(JSON.stringify(results));
-// 		    });
-// 		con.query('select*from pet where className="'+className+'"', function(error, results, fields){
-// 		    if (error) throw error;
-// 		    res.send(JSON.stringify({"response": results}));
-// 		})
 	});
 	con.query(
 		    {sql: 'Select pName,PetID, price From pet where className =?'},
@@ -84,13 +80,25 @@ router.post('/change', function(req,res,next)
 		        console.log("we made it in the query");
 		        res.send(JSON.stringify(results));
 		    });
-//	res.send(JSON.stringify("fine"));
 });
 
-router.delete('/remove', function(req,res,next)
+router.post('/remove', function(req,res,next)
 {
-  let petID = req.body.petID;
-  con.query('DELETE FROM employee WHERE EID =?')
+  let EID = req.body.EID;
+  con.query(
+    {sql: 'DELETE FROM employee WHERE EID =?'},
+    [EID],
+    function(error, results, fields){
+      if (error) throw error;
+      console.log("deleting"+EID);
+    });
+  con.query(
+    {sql: 'Select * From employee'},
+    function(error, results, fields){
+      if (error) throw error;
+      console.log("we made it into the return statement");
+      res.send(JSON.stringify(results));
+    });
 });
 
     

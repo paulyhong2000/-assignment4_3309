@@ -1,8 +1,16 @@
 <head>
     <script src="homepage.js"></script>
     <link rel="stylesheet" type="text/css" href="homepage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
+<script>
+var app = angular.module('myApp', []);
+app.controller('modelCtrl', function($scope, $http) {
+    $http.get("query1.php")
+      .then(function (response) {$scope.models = response.data.records;});
 
+});
+</script>
 <body>
     <h1>Pet Shop</h1>
     <img src="http://images.clipartpanda.com/dog-and-cat-silhouette-stock-illustration-26622153-dog-cat-play.jpg"></img>
@@ -12,6 +20,23 @@
 <p>this web application provides 5 different functionalities to interact with the petshop database.</p>
 <p>to exit the application, please press the exit application button</p>
 
+
+<div ng-app="myApp" ng-controller="modelCtrl">
+<table>
+  <tr>
+  <th>pName</th>
+  <th>PetID</th>
+  <th>price</th>
+  </tr>
+
+     <p>Display records </p>
+  <tr ng-repeat="model in models">
+    <td>{{ model.pName }}</td>
+    <td>{{ model.PetID }}</td>
+    <td>{{ model.price }}</td>
+  </tr>
+</table>
+</div>
 
 <h3>Change the price of all pets of a specific Animal Class</h3>
 <h4>Class</h4>
@@ -26,9 +51,11 @@
 <input type="button"onclick="secondbutton()" value="Delete Employee"><br>
 <br>
 
+<h3>Find sum of pet sales and item sales for a store based on store ID</h3>
+<input type="text" id="textbox3"><br>
+<input type="button"onclick="thirdbutton()" value="Submit StoreID"><br>
+<br>
 
-<input type="text" id="textbox3">
-<input type="button"onclick="thirdbutton()" value="thirdfunction">
 
 <input type="text" id="textbox4">
 <input type="button"onclick="thirdbutton()" value="fourthfunction">

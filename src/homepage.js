@@ -16,23 +16,25 @@ function firstbutton()
   
 function secondbutton()
 {
-  
+    var payload = {EID: document.getElementById("textbox2").value};
+    var enco = new URLSearchParams(payload);
+    
+    window.fetch(url+'/remove', {
+    	method: 'POST', 
+    	header: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    	body: enco,
+    });
 }
 function thirdbutton()
 {
-    var myresult="Michael is the Master";
-    window.fetch(url+'/stores')
-    .then((resp) => resp.json())
-    .then(function(data) {
-        console.log(data);
-        return data.map(function(temp) {
-        });
-    })
-    .catch(function(error) {
-        console.log(JSON.stringify(error));
-    });
+    var payload = {storeID: document.getElementById("textbox3").value};
+    var enco = new URLSearchParams(payload);
     
-    document .getElementById('output').Value=myresult;
+    window.fetch(url+'/revenue', {
+    	method: 'POST', 
+    	header: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    	body: enco,
+    });
 }
 function fourthbutton()
 {
